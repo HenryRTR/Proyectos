@@ -10,13 +10,17 @@ import java.util.Scanner;
 
 /**
  *
- * @author Henry
+ * @author Henry Richard Torres Ramirez
  */
 public class Ahorcado {
-
-    //Muestra el dibujo, errores y letras 
+    /**
+     * 
+     * @param vPalabras Los Aciertos almacenados en un Vector
+     * @param vError Errores alamcenados para luego mostrarlos
+     * @param error Dibuja por cada error cometido
+     */
     public static void dibujar(String vPalabras[], String vError[], int error) {
-        //Dibuja por cada error cometido
+
         switch(error){
             case 0:
                 System.out.println("     ************************     ");
@@ -129,6 +133,7 @@ public class Ahorcado {
                 break; 
         }
         
+        //Inicializa la palabra averiguar
         if(error <= 6){
             for (int i = 0; i < vPalabras.length; i++) {
                 System.out.print(vPalabras[i]);
@@ -139,7 +144,7 @@ public class Ahorcado {
         System.out.println("");
         System.out.println("Errores:");
         
-        //Muestra todos los errores cometidos
+        //Muestra los errores cometidos
         for(int i=0;i<vError.length;i++){
             if(vError[i] != null){
                 System.out.print(vError[i] + ",");
@@ -147,7 +152,11 @@ public class Ahorcado {
         }
     }
     
-    //Seleccionamos una palabra aleatoria averiguar
+    /**
+     * 
+     * @param palabraAlamacenada es donde esta alamacenadas todas las palabras
+     * @return una de las palabras escogidas de forma aleatoria
+     */
     public static String inicializarPalabra(String palabraAlamacenada[]) {
         Random aleatorio = new Random();
         int numero = aleatorio.nextInt(2);
@@ -162,13 +171,21 @@ public class Ahorcado {
         return palabra;
     }
     
-    //Inicializa el vector que contendra los aciertos
+    /**
+     * 
+     * @param vPalabras Contendra los aciertos
+     */
     public static void trocearvPalabras(String vPalabras[]) {
         for (int i = 0; i < vPalabras.length; i++) {
             vPalabras[i] = "_ ";
         }
     }
     
+    /**
+     * 
+     * @param vLetra contendra cada letra de la palabra averiguar
+     * @param palabra palabra averiguar
+     */
     //Trozea la palabra averiguar y lo guardamos en un vector
     public static void separarPalabra(String vLetra[], String palabra) {
         for (int i = 0; i < vLetra.length; i++) {
@@ -187,7 +204,7 @@ public class Ahorcado {
             System.out.println("");
             System.out.println("");
             System.out.println("Introduce una Letra");
-            letra = leer.nextLine().substring(0,1).toLowerCase();
+            letra = leer.nextLine().toLowerCase();
             System.out.println("");
             
             comprueba = buscarErrores(vError,letra);
@@ -221,7 +238,8 @@ public class Ahorcado {
         boolean comprobar = false;
         
         for (int i = 0; i < vError.length; i++) {
-            if(vError.equals(palabra))
+            if(vError[i] != null)
+            if(vError[i].equals(palabra))
                 comprobar = true;
                 break;
         }
